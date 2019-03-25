@@ -60,6 +60,7 @@ public class bank
                 System.err.println("Invalid deposit amount. Must be positive");
             }
         }
+        fee();
     }
     public String getName()
     {
