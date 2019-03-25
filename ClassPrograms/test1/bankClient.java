@@ -1,14 +1,14 @@
 package test1;
 import java.util.*;
-public class Main
+public class bankClient
 {
     public static void main(String args[])
     {
         Scanner scan = new Scanner(System.in);
-        bank userAccount = new bank(scan);
+        bankObjectClass userAccount = new bankObjectClass(scan);
         System.out.println(userAccount.toString());
         System.out.println("Generating second account as default");
-        bank defaultAccount = new bank(scan);
+        bankObjectClass defaultAccount = new bankObjectClass(scan);
         System.out.println(defaultAccount.toString());
         double deposit;
         if(userAccount.getBalance() <= 0)

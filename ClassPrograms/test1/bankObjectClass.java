@@ -1,21 +1,21 @@
 package test1;
 import java.util.*;
 
-public class bank
+public class bankObjectClass
 {
     private static int acctNum;
     private String name;
     private double balance;
     private String acctType;
     private static double MIN = 200.00;
-    public bank(String nam, String type)
+    public bankObjectClass(String nam, String type)
     {
         acctNum++;
         name = nam;
         acctType = type;
         balance = 0;
     }
-    public bank(Scanner scan)
+    public bankObjectClass(Scanner scan)
     {
         acctNum++;
         setName(scan);
@@ -80,9 +80,9 @@ public class bank
     }
     public boolean equals(Object object)
     {
-        if (object instanceof bank)
+        if (object instanceof bankObjectClass)
         {
-            bank bank2 = (bank) object;
+            bankObjectClass bank2 = (bankObjectClass) object;
             return (toString().equals(bank2.toString()));
         }
         else
@@ -136,9 +136,9 @@ public class bank
                 System.err.println("Invalid transfer amount. Must be positive");
             }
         }
-        if (object instanceof bank)
+        if (object instanceof bankObjectClass)
         {
-            bank account2 = (bank) object;
+            bankObjectClass account2 = (bankObjectClass) object;
             if (account2.getName().equals(name))
             {
                 if (balance > transferAmount)
