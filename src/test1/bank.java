@@ -105,6 +105,7 @@ public class bank
         {
             System.err.println("Error- Insufficient funds to make this withdrawal. Account balance unchanged.");
         }
+        fee();
     }
     public void deposit(double deposit)
     {
@@ -155,6 +156,7 @@ public class bank
                 System.err.println("Transfers may only be made between accounts under the same name. Account balances unchanged.");
             }
         }
+        fee();
     }
     public void fee()
     {
