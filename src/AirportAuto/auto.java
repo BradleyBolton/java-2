@@ -1,4 +1,4 @@
-package com.company;
+package AirportAuto;
 
 public class auto
 {
@@ -20,19 +20,21 @@ public class auto
         SetMiles(miles);
         SetGallons(gallons);
     }
-    public void SetGallons(double gallons)
+    public auto SetGallons(double gallons)
     {
         if (gallons < 0)
         {
             System.out.println("Gallons cannot be negative.");
             gallonsOfGas = 0;
+            return this;
         }
         else
         {
-            gallonsOfGas = gallons;
+            this.gallonsOfGas = gallons;
+            return this;
         }
     }
-    public void SetMiles(int miles)
+    public auto SetMiles(int miles)
     {
         if (miles < 0)
         {
@@ -40,8 +42,9 @@ public class auto
         }
         else
         {
-            milesDriven = miles;
+            this.milesDriven = miles;
         }
+        return this;
     }
     public String GetModel()
     {
