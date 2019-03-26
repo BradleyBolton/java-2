@@ -93,7 +93,7 @@ public class bankObjectClass
     }
     public void withdraw(double draw)
     {
-        if (balance >= draw && draw > 0)
+        if (balance > draw + 20 && draw > 0)
         {
             balance -= draw;
             balance = Math.round(balance * 100) / 100;
@@ -141,7 +141,7 @@ public class bankObjectClass
             bankObjectClass account2 = (bankObjectClass) object;
             if (account2.getName().equals(name))
             {
-                if (balance > transferAmount)
+                if (balance > transferAmount + 20)
                 {
                     withdraw(transferAmount);
                     account2.deposit(transferAmount);
@@ -163,7 +163,7 @@ public class bankObjectClass
     {
         if (balance < MIN)
         {
-            withdraw(balance*.1);
+            withdraw(20);
             System.out.println("Fee charged to "+name+"'s "+acctType+" account. Balance is now "+balance);
         }
         else
