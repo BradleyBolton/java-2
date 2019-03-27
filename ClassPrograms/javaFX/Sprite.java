@@ -53,6 +53,10 @@ public class Sprite
         else if (temperature > 77) { gc.setFill(Color.RED); }
         else { gc.setFill(Color.YELLOW); }
         gc.fillRect(sX, sY, 25, temperature * 8);
+        gc.setFill(Color.BLACK);
+        gc.fillText(month, sX, sY - 24);
+        String temp = ""+temperature;
+        gc.fillText(temp, sX + 5, sY - 8);
         System.out.println("Printing a rectangle. sX = "+sX+". sY = "+sY+". Height is "+temperature * 8+".");
     }
 }
