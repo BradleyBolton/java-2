@@ -3,31 +3,31 @@ package javaFX;
 import javafx.scene.canvas.*;
 import javafx.scene.paint.*;
 
-public class Sprite
+public class temperatureGraphObject
 {
     private int sX;
     private int sY;
     private double scale;
     private int temperature;
     private String month;
-    public Sprite()
+    public temperatureGraphObject()
     {
         scale = 1;
     }
-    public Sprite(int sX, int sY, double scale, int temp, String mon)
+    public temperatureGraphObject(int sX, int sY, double scale, int temp, String mon)
     {
         setCoordinates(sX, sY);
         setScale(scale);
         temperature = temp;
         month = mon;
     }
-    public Sprite setCoordinates(int sX, int sY)
+    public temperatureGraphObject setCoordinates(int sX, int sY)
     {
         this.sX = sX;
         this.sY = sY;
         return this;
     }
-    public Sprite setScale(double scale)
+    public temperatureGraphObject setScale(double scale)
     {
         this.scale = (scale > 0 ? scale:this.scale);
         return this;
@@ -57,6 +57,6 @@ public class Sprite
         gc.fillText(month, sX, sY - 24);
         String temp = ""+temperature;
         gc.fillText(temp, sX + 5, sY - 8);
-        System.out.println("Printing a rectangle. sX = "+sX+". sY = "+sY+". Height is "+temperature * 8+".");
+        System.out.println("Printing a rectangle. sX = "+sX+". sY = "+sY+". Height is "+temperature * 8+"."); //for debug
     }
 }
