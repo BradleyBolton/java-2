@@ -27,6 +27,11 @@ public class temperatureGraphClientWithArrays extends Application
                 System.out.println("The input temperature seems odd and may have been an input error. Input intended temperature for "+months[i]+" to confirm.");
                 temperature = scan.nextInt();
             }
+            if (temperature < 0)
+            {
+                System.err.println("Negative temperature not currently supported. Temperature set to 0");
+                temperature = 0;
+            }
             month[i] = new temperatureGraphObject(0, 0, 1, temperature, months[i]);
             if (lowTemp > temperature) { lowTemp = temperature; }
             if (highTemp < temperature) {highTemp = temperature; }
