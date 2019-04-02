@@ -19,25 +19,38 @@ public class temperatureGraphClientWithArrays extends Application
         int lowLimit = 0;
         int highLimit = 40;
         int flip = 1;
+        int input = 0;
+        boolean check;
+        int lastTemp = 0;
         for (int i = 0; i < 12; i++) {
-            System.out.println("temperature in "+months[i]+"- ");
-            temperature = scan.nextInt();
-            if (temperature > highLimit || temperature < lowLimit)
-            {
-                System.out.println("The input temperature seems odd and may have been an input error. Input intended temperature for "+months[i]+" to confirm.");
-                temperature = scan.nextInt();
-            }
-            if (temperature < 0)
-            {
-                System.err.println("Negative temperature not currently supported. Temperature set to 0");
-                temperature = 0;
-            }
+            System.out.println("temperature in " + months[i] + "- ");
+             do{
+                 check = false;
+                try {
+                    input = Integer.parseInt(scan.next());
+                } catch (NumberFormatException ignore) {
+                    System.err.println("Invalid input, must be an integer.");
+                    check = true;
+                }
+                if (input < 0)
+                {
+                    System.err.println("Negative temperature not currently supported.");
+                    check = true;
+                }
+                if ((input > highLimit || input < lowLimit) && lastTemp != input) {
+                     System.out.println("The input temperature seems odd and may have been an input error. Re input intended temperature for " + months[i] + " to confirm, or input your intended value.");
+                     check = true;
+                     lastTemp = input;
+                 }
+
+            } while (check);
+             temperature = input;
             month[i] = new temperatureGraphObject(0, 0, 1, temperature, months[i]);
             if (lowTemp > temperature) { lowTemp = temperature; }
             if (highTemp < temperature) {highTemp = temperature; }
             if (months[i].equals("Jul")) { flip = flip * -1; }
             lowLimit += 10*flip;
-            highLimit += 10*flip;
+            highLimit += 15*flip;
         }
         GraphicsContext gc = JIGRaphicsUtility.setUpGraphics(stage, "One year of monthly temperatures", 490, highTemp * 8 + 100); //height and width are backwards
         int x = 10;
