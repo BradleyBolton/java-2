@@ -1,5 +1,10 @@
 package Test78;
 
+/* Bradley Bolton
+ * Horse Barn Object Class
+ * Runs on Java SDK 1.8.0_201
+ */
+
 public class HorseBarn
 {
     private Horse [] spaces;
@@ -7,15 +12,27 @@ public class HorseBarn
     {
         boolean validHorse = true;
         spaces = new Horse[input.length];
-        for (int i = 0; i < input.length; i++)
+        for (int i = 0; i < input.length; i++) //copies input array to spaces
         {
-            spaces[i] = input[i];
+            for (int n = i; n >= 0; n--) //checks for duplicate horses
+            {
+                if (input[i] != null)
+                {
+                    if (input[i].equals(spaces[n])) {
+                        validHorse = false;
+                    }
+                }
+            }
+            if (validHorse)
+            {
+                spaces[i] = input[i];
+            }
         }
     }
-    public void setSpace(int space, Horse newHorse)
+    public void setSpace(int space, Horse newHorse) //puts the horse object parameter at the location given by space
     {
         boolean validHorse = true;
-        for (int i = 0; i < spaces.length; i++)
+        for (int i = 0; i < spaces.length; i++) //checks for duplicate horses
         {
             if (newHorse.equals(spaces[i]));
             {
@@ -24,14 +41,14 @@ public class HorseBarn
         }
         if (validHorse)
         {
-            spaces[space] = newHorse;
+            spaces[space] = newHorse; //places the input horse at specified location
         }
     }
-    public Horse getHorse(int space)
+    public Horse getHorse(int space) //returns the horse at a location
     {
         return spaces[space];
     }
-    public int findHorseSpace(Horse horse)
+    public int findHorseSpace(Horse horse) //returns the location of the parameter horse
     {
         for (int i = 0; i < spaces.length; i++)
         {
@@ -44,7 +61,7 @@ public class HorseBarn
     }
     //Answer to question 1: spaces[index].getName();
     //Answer to question 2: str.equals(anotherString);
-    public int findHorseSpace(String name)
+    public int findHorseSpace(String name) //returns the location of a horse with given name
     {
         for (int i = 0; i < spaces.length; i++)
         {
@@ -60,7 +77,14 @@ public class HorseBarn
         String output = "";
         for (int i = 0; i < spaces.length; i++)
         {
-            output += "Space "+i+" has a horse named "+spaces[i].getName()+".\n";
+            if (spaces[i] != null)
+            {
+                output += "Space " + i + " has a horse named " + spaces[i].getName() + ".\n";
+            }
+            else
+            {
+                output += "Space "+i+" is empty.\n";
+            }
         }
         return output;
     }
@@ -73,16 +97,16 @@ public class HorseBarn
         }
         else
         {
-            System.err.println("Object must be of horse class.\n");
+            System.err.println("Object must be of horse barn class.\n");
             return false;
         }
     }
-    public int getHorseCount()
+    public int getHorseCount() //returns the number of horses in the barn
     {
         int count = 0;
         for (int i = 0; i < spaces.length; i++)
         {
-            if (spaces[i] != null)
+            if (spaces[i] != null) //checks if the space in the barn is occupied
             {
                 count += 1;
             }

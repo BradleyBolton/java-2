@@ -1,5 +1,10 @@
 package Test78;
 
+/* Bradley Bolton
+ * Horse Object Class
+ * Runs on Java SDK 1.8.0_201
+ */
+
 public class Horse
 {
     private String name;
@@ -28,7 +33,6 @@ public class Horse
         }
         else
         {
-            System.err.println("Object must be of horse class.\n");
             return false;
         }
     }
