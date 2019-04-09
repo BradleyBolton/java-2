@@ -5,10 +5,22 @@ public class HorseBarn
     private Horse [] spaces;
     public HorseBarn(Horse [] input)
     {
+        boolean validHorse = true;
         spaces = new Horse[input.length];
         for (int i = 0; i < input.length; i++)
         {
-            spaces[i] = input[i];
+            for (int n = i; n >= 0; n--)
+            {
+                if (input[i].getName().equals(spaces[n].getName()));
+                {
+                    validHorse = false;
+                }
+            }
+            if (validHorse)
+            {
+                spaces[i] = input[i];
+            }
+            validHorse = true;
         }
     }
     public void setSpace(int space, Horse newHorse)
