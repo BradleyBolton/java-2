@@ -1,0 +1,352 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+import java.util.Optional;
+import java.util.Random;
+import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+
+public class TwoDimArrayPracticeController {
+    private final int ROWS = 4;
+    private final int COLUMNS = 20;
+    private BarChart bc;
+    private int[][] arr;
+    private int key;
+    private int rowSelected;
+    private static int[][] result;
+    @FXML
+    private BorderPane bp;
+    @FXML
+    private HBox hBox1;
+    @FXML
+    private HBox hBox2;
+    @FXML
+    private Button fill;
+    @FXML
+    private Button print;
+    @FXML
+    private Button set;
+    @FXML
+    private Button count;
+    @FXML
+    private Button find;
+    private int activity;
+    private Pane pane;
+    private Canvas canvas;
+    private GraphicsContext gc;
+    private boolean animate = false;
+    private boolean run = false;
+    private int resultValue;
+
+    public TwoDimArrayPracticeController() {
+    }
+
+    public void initialize() {
+        this.arr = new int[4][20];
+        result = new int[4][20];
+
+        for(int i = 0; i < this.arr.length; ++i) {
+            for(int j = 0; j < this.arr[i].length; ++j) {
+                this.arr[i][j] = (int)(Math.random() * 31.0D) + 50;
+            }
+        }
+
+        this.bc = new BarChart(this.arr);
+        Insets insets = new Insets(10.0D, 10.0D, 10.0D, 10.0D);
+        this.bp.setPadding(insets);
+        this.hBox1.setPadding(insets);
+        this.pane = new Pane();
+        this.bp.setCenter(this.pane);
+        this.canvas = new Canvas(500.0D, 550.0D);
+        this.pane.getChildren().add(this.canvas);
+        this.gc = this.canvas.getGraphicsContext2D();
+        this.bc.draw(this.gc);
+    }
+
+    @FXML
+    protected void activity(ActionEvent event) {
+        this.bc.draw(this.gc);
+        if (event.getSource() == this.fill) {
+            this.activity = 0;
+            this.fillValues();
+            this.bc.setData(this.arr);
+        } else if (event.getSource() == this.print) {
+            this.activity = 1;
+            this.printArray();
+        } else if (event.getSource() == this.set) {
+            this.activity = 2;
+            this.getKeyInputForSetValue();
+            if (this.run) {
+                this.bc.setKey(this.key);
+                this.bc.setRowSelected(this.rowSelected);
+                this.setValues(this.key, this.rowSelected);
+                this.bc.setData(this.arr);
+            } else {
+                this.animate = false;
+            }
+        } else if (event.getSource() == this.count) {
+            this.activity = 3;
+            this.getKeyInput(this.activity);
+            if (this.run) {
+                this.bc.setKey(this.key);
+                this.resultValue = this.countFound(this.key);
+                this.bc.setResultValue(this.resultValue);
+            } else {
+                this.animate = false;
+            }
+        } else if (event.getSource() == this.find) {
+            this.activity = 4;
+            this.getKeyInputForMinimum();
+            if (this.run) {
+                this.bc.setKey(this.key);
+                this.resultValue = this.findMinimum(this.key);
+                this.bc.setResultValue(this.resultValue);
+            } else {
+                this.animate = false;
+            }
+        }
+
+        if (this.animate) {
+            this.disableButtons(true);
+            AnimationTimer timer = new TwoDimArrayPracticeController.ArrayAnimationTimer();
+            timer.start();
+        }
+
+    }
+
+    public void disableButtons(boolean state) {
+        this.fill.setDisable(state);
+        this.print.setDisable(state);
+        this.set.setDisable(state);
+        this.count.setDisable(state);
+        this.find.setDisable(state);
+    }
+
+    public void fillValues() {
+        Random rand = new Random();
+
+        for(int row = 0; row < this.arr.length; ++row) {
+            System.out.print(row + "\t");
+
+            for(int column = 0; column < this.arr[row].length; ++column) {
+                this.arr[row][column] = rand.nextInt(31) + 50;
+                this.animate(row, column, -1);
+            }
+
+            System.out.println();
+        }
+
+    }
+
+    public void printArray() {
+    }
+
+    public void setValues(int value, int row) {
+    }
+
+    public int findMinimum(int column) {
+        return 0;
+    }
+
+    public int countFound(int value) {
+        return 0;
+    }
+
+    public void animate(int i, int j, int value) {
+        int[][] array = new int[this.arr.length][];
+
+        int k;
+        for(k = 0; k < this.arr.length; ++k) {
+            array[k] = new int[this.arr[k].length];
+        }
+
+        for(k = 0; k < this.arr.length; ++k) {
+            for(int l = 0; l < this.arr[k].length; ++l) {
+                array[k][l] = this.arr[k][l];
+            }
+        }
+
+        MethodState ms = new MethodState(i, j, value, array);
+        this.bc.addMethodState(ms);
+        this.animate = true;
+    }
+
+    public void getKeyInput(int a) {
+        this.run = false;
+        String keyString = "";
+        if (a == 4) {
+            keyString = "Enter an integer value between 50 and 80";
+        } else if (a == 3) {
+            keyString = "Frequency Count";
+        }
+
+        boolean goodInput = false;
+
+        while(!goodInput || this.key < 50 || this.key > 80) {
+            try {
+                TextInputDialog dialog = new TextInputDialog("");
+                dialog.setTitle("User Input");
+                dialog.setHeaderText(keyString);
+                dialog.setContentText("Enter an int between 50 and 80");
+                Optional<String> result = dialog.showAndWait();
+                String answer = null;
+                if (result.isPresent()) {
+                    answer = (String)result.get();
+                }
+
+                if (answer == null) {
+                    goodInput = false;
+                    this.run = false;
+                    break;
+                }
+
+                this.key = Integer.parseInt(answer);
+                this.bc.setKey(this.key);
+                goodInput = true;
+                this.run = true;
+            } catch (Exception var7) {
+            }
+        }
+
+    }
+
+    public void getKeyInputForMinimum() {
+        this.run = false;
+        String keyString = "Compute the Minimum Value for a Column";
+        boolean goodInput = false;
+
+        while(!goodInput || this.key < 0 || this.key > 19) {
+            try {
+                TextInputDialog dialog = new TextInputDialog("");
+                dialog.setTitle("User Input");
+                dialog.setHeaderText(keyString);
+                dialog.setContentText("Enter an int between 0 and 19");
+                Optional<String> result = dialog.showAndWait();
+                String answer = null;
+                if (result.isPresent()) {
+                    answer = (String)result.get();
+                }
+
+                if (answer == null) {
+                    goodInput = false;
+                    this.run = false;
+                    break;
+                }
+
+                this.key = Integer.parseInt(answer);
+                this.bc.setKey(this.key);
+                goodInput = true;
+                this.run = true;
+            } catch (Exception var6) {
+            }
+        }
+
+    }
+
+    public void getKeyInputForSetValue() {
+        this.run = false;
+        String keyString = "Set Values for a Row";
+        boolean goodInput = false;
+
+        TextInputDialog dialog;
+        Optional result;
+        String answer;
+        while(!goodInput || this.key < 50 || this.key > 80) {
+            try {
+                dialog = new TextInputDialog("");
+                dialog.setTitle("User Input");
+                dialog.setHeaderText(keyString);
+                dialog.setContentText("Enter an int between 50 and 80");
+                result = dialog.showAndWait();
+                answer = null;
+                if (result.isPresent()) {
+                    answer = (String)result.get();
+                }
+
+                if (answer == null) {
+                    goodInput = false;
+                    break;
+                }
+
+                this.key = Integer.parseInt(answer);
+                this.bc.setKey(this.key);
+                goodInput = true;
+            } catch (Exception var7) {
+            }
+        }
+
+        if (goodInput) {
+            this.run = false;
+            goodInput = false;
+
+            while(!goodInput || this.rowSelected < 0 || this.rowSelected > 3) {
+                try {
+                    dialog = new TextInputDialog("");
+                    dialog.setTitle("User Input");
+                    dialog.setHeaderText("Set Values for a Row");
+                    dialog.setContentText("Enter an int between 0 and 3");
+                    result = dialog.showAndWait();
+                    answer = null;
+                    if (result.isPresent()) {
+                        answer = (String)result.get();
+                    }
+
+                    if (answer == null) {
+                        goodInput = false;
+                        this.run = false;
+                        break;
+                    }
+
+                    this.rowSelected = Integer.parseInt(answer);
+                    goodInput = true;
+                    this.run = true;
+                } catch (Exception var6) {
+                }
+            }
+        }
+
+    }
+
+    private class ArrayAnimationTimer extends AnimationTimer {
+        private ArrayAnimationTimer() {
+        }
+
+        public void handle(long now) {
+            if (TwoDimArrayPracticeController.this.activity != 1) {
+                Pause.wait(0.5D);
+            }
+
+            if (TwoDimArrayPracticeController.this.activity == 0) {
+                TwoDimArrayPracticeController.this.bc.drawNewArray(TwoDimArrayPracticeController.this.gc);
+            } else if (TwoDimArrayPracticeController.this.activity == 1) {
+                TwoDimArrayPracticeController.this.bc.drawArray(TwoDimArrayPracticeController.this.gc);
+            } else if (TwoDimArrayPracticeController.this.activity == 2) {
+                TwoDimArrayPracticeController.this.bc.drawNewValue(TwoDimArrayPracticeController.this.gc);
+            } else if (TwoDimArrayPracticeController.this.activity == 3) {
+                TwoDimArrayPracticeController.this.bc.drawCountValue(TwoDimArrayPracticeController.this.gc);
+            } else if (TwoDimArrayPracticeController.this.activity == 4) {
+                TwoDimArrayPracticeController.this.bc.drawMinimum(TwoDimArrayPracticeController.this.gc);
+            }
+
+            TwoDimArrayPracticeController.this.bc.incrementCurrentIndex();
+            if (!TwoDimArrayPracticeController.this.bc.checkCurrentIndex()) {
+                TwoDimArrayPracticeController.this.bc.resetCurrentIndex();
+                TwoDimArrayPracticeController.this.bc.clearMS();
+                this.stop();
+                TwoDimArrayPracticeController.this.disableButtons(false);
+            }
+
+        }
+    }
+}
