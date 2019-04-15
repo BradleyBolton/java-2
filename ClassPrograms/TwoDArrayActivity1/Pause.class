@@ -1,0 +1,27 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+public class Pause {
+    public Pause() {
+    }
+
+    public static void wait(double time) {
+        try {
+            Thread.sleep((long)((int)(time * 1000.0D)));
+        } catch (InterruptedException var3) {
+            var3.printStackTrace();
+        }
+
+    }
+
+    public void wait2(double time) {
+        try {
+            Thread.sleep((long)((int)(time * 1000.0D)));
+        } catch (InterruptedException var4) {
+            var4.printStackTrace();
+        }
+
+    }
+}
