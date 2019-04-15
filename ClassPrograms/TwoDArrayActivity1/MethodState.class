@@ -1,0 +1,39 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+public class MethodState {
+    private int i;
+    private int j;
+    private int value;
+    private int[][] array;
+
+    public MethodState(int i, int j, int value, int[][] array) {
+        this.i = i;
+        this.j = j;
+        this.value = value;
+        this.array = array;
+    }
+
+    public int getI() {
+        return this.i;
+    }
+
+    public int getJ() {
+        return this.j;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
+
+    public int getData(int i, int j) {
+        return this.array[i][j];
+    }
+
+    public String toString() {
+        String result = this.i + "; " + this.j + "; value: " + this.value;
+        return result;
+    }
+}
