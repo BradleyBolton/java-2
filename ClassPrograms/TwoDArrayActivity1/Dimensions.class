@@ -1,0 +1,14 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+public interface Dimensions {
+    int APP_WIDTH = 500;
+    int APP_HEIGHT = 550;
+    int APP_PADDING = 10;
+    int MEDIUM_FONT_SIZE = 32;
+    int MEDIUM_SMALL_FONT_SIZE = 24;
+    int MEDIUM_SMALLER_FONT_SIZE = 18;
+    int SMALL_FONT_SIZE = 12;
+}
