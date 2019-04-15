@@ -1,0 +1,34 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+import java.net.URL;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+public class TwoDimArrayPracticeApplication extends Application {
+    public TwoDimArrayPracticeApplication() {
+    }
+
+    public void start(Stage stage) {
+        try {
+            URL url = this.getClass().getResource("fxml_two_dim_array_practice.fxml");
+            BorderPane root = (BorderPane)FXMLLoader.load(url);
+            Scene scene = new Scene(root, 500.0D, 550.0D);
+            stage.setTitle("Two Dimensional Array Practice");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception var5) {
+            System.out.println(var5.getMessage());
+        }
+
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
