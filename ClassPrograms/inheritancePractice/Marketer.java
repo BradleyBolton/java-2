@@ -2,6 +2,10 @@ package inheritancePractice;
 
 public class Marketer extends Employee
 {
+    public Marketer (int years)
+    {
+        super(years);
+    }
     public double getSalary()
     {
         return 10000 + super.getSalary();
